@@ -1,0 +1,8 @@
+field,value
+source_commit,1f9b4288cee5a78d1e5da007fc306bbaa662fc6d
+source_url,https://raw.githubusercontent.com/meituan/Meituan-INFORMS-TSL-Research-Challenge/1f9b4288cee5a78d1e5da007fc306bbaa662fc6d/all_waybill_info_meituan_0322.csv.zip
+archive_md5,eb647d2297ae6818ef05fb3ad71ab12f
+timezone,Asia/Shanghai (UTC+8)
+peak_hours,11:00 <= acceptance < 14:00 or 17:00 <= acceptance < 20:00
+sample,"Completed, accepted, non-prebooked orders with valid timestamps"
+workload_ties,Simultaneous acceptances included together; simultaneous completions removed first

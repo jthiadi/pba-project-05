@@ -1,0 +1,80 @@
+  
+ Programming for Business Analytics Final Project Proposal  
+**One More Order:** A Comparative Analysis of the Trade-Off Between   
+Taking More Orders and Delivering on Time Using Meituan Data  
+*Grace Angeline Sun 孫香樺 114006473 \| Jennifer Nathania 梁嫺女 112006202 \| Justin Thiadi 程煒財 112006234*  
+ *\| Mario Ananda Salim 林孫豪 112006261 \| Steven Indrawan 鄭瑞冠 112006211*
+
+1. ## **Introduction**
+
+   **Meituan (美團)** is one of China's leading online service platforms, offering food delivery, hotel bookings, and other local services. Its food delivery service, Meituan Waimai (美團外賣), connects customers, restaurants, and couriers across mainland China. The platform uses data-driven dispatching systems to manage orders, assign couriers, and coordinate deliveries efficiently.  
+   One common strategy is **order batching**, where couriers handle multiple orders simultaneously to improve productivity and reduce unnecessary travel. However, while batching may increase operational efficiency, it can also result in **longer delivery times**, particularly during peak hours when demand is high.  
+   This creates an important **business trade-off between courier productivity and delivery timeliness**. Therefore, **this project aims to compare single-order and batched deliveries, examine how workload and demand conditions relate to delivery performance, and identify opportunities to improve dispatching strategies.**
+
+2. ## **Related Research and Proposed Contribution**
+
+   Lu et al. (2026) investigated factors contributing to food delivery delays, including courier workload. Their study measures workload using the total number of orders within a delivery wave and recommends workload restrictions while acknowledging possible costs to courier earnings. Our project will extend this analysis by measuring the number of unfinished orders when a courier accepts a new task. We will examine both delivery timeliness and courier productivity across workload levels and compare peak and off-peak periods. 
+
+3. ## **Research Question**
+
+   (*Descriptive*) Using R and Meituan data, how does multi-order courier workload relate to delivery lateness and courier productivity, and how do these relationships differ between peak and off-peak periods?
+
+4. ## **Research Objectives**
+
+1. Compare delivery duration, late-delivery rates, and courier productivity across different courier workload levels.  
+2. Examine whether these relationships differ between peak and off-peak periods after accounting for delivery distance, location, and courier differences.  
+3. Evaluate whether conclusions change when workload is measured using the number of accepted but unfinished orders at acceptance versus the total number of orders within a delivery wave.
+
+5. ## **Hypothesis**
+
+   Batching allows couriers to deliver multiple orders along overlapping routes, potentially reducing travel time per order. However, additional restaurant pickups and delivery stops may increase the time individual customers wait. Therefore, batching may create a trade-off between operational efficiency and delivery timeliness.
+
+6. ## **Dataset Description**
+
+   This study uses the **Meituan On-Demand Food Delivery Dataset**, released for the 2025 INFORMS Transportation Science and Logistics Research Challenge. The dataset contains anonymized operational records collected from Meituan's food delivery platform.  
+* Source: Meituan Research Challenge — GitHub
+
+  [https\://github.com/meituan/Meituan-INFORMS-TSL-Research-Challenge.git](https://github.com/meituan/Meituan-INFORMS-TSL-Research-Challenge.git) 
+
+* Collection period: October 17–24, 2022\.  
+* Dataset size: 568,546 orders, 4,955 couriers, and 4,962 merchants.  
+* Unit of observation: Individual delivery order (with courier-level aggregation for productivity).  
+* Data collection: Historical platform records of orders, courier assignments, dispatching, and delivery events.
+
+
+7. ## **Key Variables & Methodology**
+
+   Our key explanatory variable (X) is courier workload at order acceptance: the number of accepted but unfinished orders, including the newly accepted order. Using *courier\_id*, *grab\_time*, and *arrive\_time*, we will classify workload into one, two, three, and four or more orders.   
+   Our outcome variables (Y) are:
+
+| Variable / Unit | Definition |
+| ----- | ----- |
+| Delivery duration / minutes | *arrive\_time* − *platform\_order\_time*, converted to minutes |
+| Late delivery / binary | Whether *arrive\_time* \> *estimate\_arrived\_time*  |
+| Courier productivity / orders/hour | Completed orders divided by observed active delivery hours |
+
+   
+
+   **Methodology**
+
+   1. **Check data quality**: Check missing and invalid timestamps, resolve repeated order records, and report usable observations, workload-group sizes, and late/on-time counts.  
+      2. **Compare delivery outcomes using R**: Use descriptive statistics, visualizations, and regression to compare workload groups, accounting for delivery distance, location, time, and courier differences. Compare peak and off-peak periods using predefined time windows.  
+      3. **Analyse courier productivity**: At the courier-hour level, examine how completed orders per active hour relate to average unfinished workload. Calculate active hours from *wave\_start\_time* and *wave\_end\_time*, merging overlapping intervals to avoid double-counting.  
+      4. **Check consistency**: Repeat the analysis using total orders per delivery wave as an alternative workload measure.  
+      5. **Interpret findings**: Report associations, recognizing that differences between workload groups may also reflect factors such as traffic or restaurant waiting times.
+
+8. ## **Supporting & Contradicting Evidence**
+
+1. Supporting evidence: If batched deliveries show significantly longer average delivery times but higher completed orders per courier-hour, this would support the proposed efficiency–timeliness trade-off.  
+2. Contradicting evidence: If batched deliveries have similar or shorter delivery times, or fail to improve courier productivity, the hypotheses would not be supported.
+
+   
+
+9. ## **Business Significance**
+
+   The findings may help food delivery platforms **better understand when order batching is associated with operational benefits and when it may compromise delivery timeliness.** The findings may **help food delivery platforms improve courier utilization, reduce delivery delays, and make more informed dispatching decisions.**  
+   
+
+10. ## **Reference**
+
+    Lu, M., Liu, R., Jin, Z., & Yuan, Q. (2026). A causal discovery and inference framework for on-demand food delivery delays. npj Sustainable Mobility and Transport, 3, 22\. [https\://doi.org/10.1038/s44333-026-00097-1](https://doi.org/10.1038/s44333-026-00097-1). 
