@@ -1,6 +1,6 @@
 # Milestone 2 - Research proposal
 
-[Read the proposal](Proposal.qmd) for the research question, data source, hypotheses, and planned methodology.
+[Read the proposal PDF](PBA_Milestone2_Group5.pdf) for the research question, data source, hypotheses, and planned methodology. The [editable Quarto source](Proposal.qmd) is also available.
 
 See [Milestone 3](../Milestone%203/) for descriptive figures and reproducible code.
 
