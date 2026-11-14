@@ -26,7 +26,7 @@ install.packages(c("data.table", "ggplot2", "scales"))
 # order-level subset plus small aggregate figure tables. Internet required once.
 Rscript scripts/01_prepare_data.R
 
-# Recreates PNG and vector-PDF figures from the small committed CSVs.
+# Recreates the PNG figures from the small committed CSVs.
 # This step works without downloading the raw data.
 Rscript scripts/02_plot_figures.R
 

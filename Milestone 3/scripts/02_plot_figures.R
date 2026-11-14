@@ -58,13 +58,9 @@ p2 <- ggplot(groups, aes(workload_group, late_rate, color = period, shape = peri
       "Observed completed-order workload; these descriptive comparisons do not establish causality.", sep = "\n")) +
   theme(legend.position = "none", strip.text = element_text(face = "bold", size = 12, color = ink),
     panel.spacing.x = grid::unit(18, "pt"))
-for (ext in c("png", "pdf")) {
-  # Cairo embeds Times New Roman in vector PDFs; PNG uses the system font.
-  figure_device <- if (ext == "pdf") grDevices::cairo_pdf else "png"
-  ggsave(paste0("output/figures/figure1_delay_distribution.", ext), p1,
-    width = 9, height = 4.7, dpi = 320, bg = "white", device = figure_device)
-  ggsave(paste0("output/figures/figure2_workload_lateness.", ext), p2,
-    width = 9, height = 5.1, dpi = 320, bg = "white", device = figure_device)
-}
+ggsave("output/figures/figure1_delay_distribution.png", p1,
+  width = 9, height = 4.7, dpi = 320, bg = "white")
+ggsave("output/figures/figure2_workload_lateness.png", p2,
+  width = 9, height = 5.1, dpi = 320, bg = "white")
 writeLines(trimws(capture.output(sessionInfo()), which = "right"), "output/sessionInfo.txt")
-cat("Saved both figures as PNG and vector PDF.\n")
+cat("Saved both figures as PNG.\n")
