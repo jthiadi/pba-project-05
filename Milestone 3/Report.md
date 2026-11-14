@@ -8,7 +8,7 @@ We use Meituan delivery records dated October 17-24, 2022. From 654,343 waybill 
 
 ## 1. Delivery timing relative to the promise
 
-![Figure 1](../output/figures/figure1_delay_distribution.png)
+![Figure 1](output/figures/figure1_delay_distribution.png)
 
 **What stands out.** Figure 1 plots actual arrival minus promised arrival. Most orders arrive early: the median is 8.3 minutes before the promise, and the middle half arrive between 13.5 and 3.0 minutes early. Nevertheless, 80,742 orders (14.8%) are late. At the 95th percentile, delivery is 4.9 minutes late; 3,940 orders (0.72%) are more than 15 minutes late. The pooled end bars retain extreme observations.
 
@@ -16,7 +16,7 @@ We use Meituan delivery records dated October 17-24, 2022. From 654,343 waybill 
 
 ## 2. Workload and late-delivery rates
 
-![Figure 2](../output/figures/figure2_workload_lateness.png)
+![Figure 2](output/figures/figure2_workload_lateness.png)
 
 Workload counts accepted but unfinished orders at acceptance, including the new order and valid prebooks. Simultaneous acceptances count together; completions at that second are removed first. One order at acceptance does not guarantee it remains unbatched later. Peak = 11:00-14:00 or 17:00-20:00 at acceptance, Asia/Shanghai; all other hours are off-peak.
 

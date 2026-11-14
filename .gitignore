@@ -1,7 +1,7 @@
-data/raw/*
-!data/raw/.gitkeep
-data/processed/*
-!data/processed/.gitkeep
+Milestone 3/data/raw/*
+!Milestone 3/data/raw/.gitkeep
+Milestone 3/data/processed/*
+!Milestone 3/data/processed/.gitkeep
 tmp/
 .Rhistory
 .RData

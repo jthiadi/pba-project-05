@@ -1,4 +1,4 @@
-# Run from the repository root: Rscript scripts/01_prepare_data.R
+# Run from the Milestone 3 folder: Rscript scripts/01_prepare_data.R
 # Real Meituan data; no simulated observations and no model estimation.
 suppressPackageStartupMessages(library(data.table))
 options(timeout = max(600, getOption("timeout")))

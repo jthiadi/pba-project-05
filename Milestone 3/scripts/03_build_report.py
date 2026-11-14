@@ -1,6 +1,6 @@
 """Build the two-page submission and its editable Markdown from real summary tables.
 
-Run from the repo root: python scripts/03_build_report.py
+Run from the Milestone 3 folder: python scripts/03_build_report.py
 Requires reportlab; all data preparation and plotting are in R.
 """
 import csv
@@ -217,7 +217,7 @@ Group 5: Grace Angeline Sun; Jennifer Nathania; Justin Thiadi; Mario Ananda Sali
 
 ## 1. Delivery timing relative to the promise
 
-![Figure 1](../output/figures/figure1_delay_distribution.png)
+![Figure 1](output/figures/figure1_delay_distribution.png)
 
 **What stands out.** {figure1_shows}
 
@@ -225,7 +225,7 @@ Group 5: Grace Angeline Sun; Jennifer Nathania; Justin Thiadi; Mario Ananda Sali
 
 ## 2. Workload and late-delivery rates
 
-![Figure 2](../output/figures/figure2_workload_lateness.png)
+![Figure 2](output/figures/figure2_workload_lateness.png)
 
 Workload counts accepted but unfinished orders at acceptance, including the new order and valid prebooks. Simultaneous acceptances count together; completions at that second are removed first. One order at acceptance does not guarantee it remains unbatched later. Peak = 11:00-14:00 or 17:00-20:00 at acceptance, Asia/Shanghai; all other hours are off-peak.
 
@@ -241,5 +241,5 @@ Source: [Meituan data and dictionary]({source_url}); [supplementary clarificatio
 
 This research was supported by data provided by Meituan.
 """
-(ROOT / "reports" / "PBA_Milestone3_Group5.md").write_text(markdown, encoding="utf-8")
+(ROOT / "Report.md").write_text(markdown, encoding="utf-8")
 print(pdf_path)

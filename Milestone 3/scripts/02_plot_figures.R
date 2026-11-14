@@ -1,4 +1,4 @@
-# Run from the repository root. Requires only the committed small summary tables.
+# Run from the Milestone 3 folder. Requires only the committed small summary tables.
 suppressPackageStartupMessages({library(data.table); library(ggplot2)})
 dir.create("output/figures", recursive = TRUE, showWarnings = FALSE)
 teal <- "#167D8D"
