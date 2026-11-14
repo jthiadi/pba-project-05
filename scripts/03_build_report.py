@@ -4,17 +4,33 @@ Run from the repo root: python scripts/03_build_report.py
 Requires reportlab; all data preparation and plotting are in R.
 """
 import csv
+import os
 from pathlib import Path
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
     Image, PageBreak, Paragraph, SimpleDocTemplate, Spacer,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# Embed actual Times New Roman fonts; do not substitute PDF's built-in Times.
+# On other systems, point PBA_FONT_DIR at a licensed copy of these four files.
+font_dir = Path(os.environ.get("PBA_FONT_DIR", "C:/Windows/Fonts"))
+font_files = {"TimesNewRoman": "times.ttf", "TimesNewRoman-Bold": "timesbd.ttf",
+              "TimesNewRoman-Italic": "timesi.ttf", "TimesNewRoman-BoldItalic": "timesbi.ttf"}
+for font_name, filename in font_files.items():
+    font_path = font_dir / filename
+    if not font_path.is_file():
+        raise FileNotFoundError(f"Missing {font_path}. Set PBA_FONT_DIR to your Times New Roman font directory.")
+    pdfmetrics.registerFont(TTFont(font_name, str(font_path)))
+pdfmetrics.registerFontFamily("TimesNewRoman", normal="TimesNewRoman",
+    bold="TimesNewRoman-Bold", italic="TimesNewRoman-Italic", boldItalic="TimesNewRoman-BoldItalic")
 
 
 def read_csv(name):
@@ -106,29 +122,28 @@ next_steps = (
 source_url = "https://github.com/meituan/Meituan-INFORMS-TSL-Research-Challenge"
 clarification_url = source_url + "/blob/main/tsl_meituan_2024_data_report_20241015.pdf"
 source_note = (
-    f'<b>Source:</b> <link href="{source_url}" color="#167D8D">Meituan INFORMS TSL '
+    f'<b>Source:</b> <link href="{source_url}" color="#000000">Meituan INFORMS TSL '
     'Research Challenge dataset and data dictionary</link>; '
-    f'<link href="{clarification_url}" color="#167D8D">supplementary clarification '
+    f'<link href="{clarification_url}" color="#000000">supplementary clarification '
     '(October 2024), section 2.2</link>. '
     "This research was supported by data provided by Meituan."
 )
 
 styles = getSampleStyleSheet()
-ink = colors.HexColor("#182F43")
-teal = colors.HexColor("#167D8D")
-styles.add(ParagraphStyle(name="ReportTitle", fontName="Helvetica-Bold", fontSize=24,
+ink = colors.black
+styles.add(ParagraphStyle(name="ReportTitle", fontName="TimesNewRoman-Bold", fontSize=24,
                           leading=28, textColor=ink, spaceAfter=5))
-styles.add(ParagraphStyle(name="Kicker", fontName="Helvetica-Bold", fontSize=9,
-                          leading=13, textColor=teal, spaceAfter=9))
-styles.add(ParagraphStyle(name="Team", fontName="Helvetica", fontSize=8,
+styles.add(ParagraphStyle(name="Kicker", fontName="TimesNewRoman-Bold", fontSize=9,
+                          leading=13, textColor=ink, spaceAfter=9))
+styles.add(ParagraphStyle(name="Team", fontName="TimesNewRoman", fontSize=8,
                           leading=11, textColor=ink, spaceAfter=11))
-styles.add(ParagraphStyle(name="Section", fontName="Helvetica-Bold", fontSize=13,
+styles.add(ParagraphStyle(name="Section", fontName="TimesNewRoman-Bold", fontSize=13,
                           leading=17, textColor=ink, spaceBefore=9, spaceAfter=6))
-styles.add(ParagraphStyle(name="Text", fontName="Helvetica", fontSize=10,
+styles.add(ParagraphStyle(name="Text", fontName="TimesNewRoman", fontSize=10,
                           leading=14, textColor=ink, spaceAfter=8, alignment=TA_LEFT))
-styles.add(ParagraphStyle(name="SmallNote", fontName="Helvetica", fontSize=8,
-                          leading=11, textColor=colors.HexColor("#42576A"), spaceAfter=6))
-styles.add(ParagraphStyle(name="Caption", fontName="Helvetica-Bold", fontSize=9,
+styles.add(ParagraphStyle(name="SmallNote", fontName="TimesNewRoman", fontSize=8,
+                          leading=11, textColor=ink, spaceAfter=6))
+styles.add(ParagraphStyle(name="Caption", fontName="TimesNewRoman-Bold", fontSize=9,
                           leading=12, textColor=ink, spaceAfter=7))
 
 out = ROOT / "output" / "pdf"
@@ -181,10 +196,10 @@ story = [
 
 def footer(canvas, document):
     canvas.saveState()
-    canvas.setStrokeColor(colors.HexColor("#D9E2E8"))
+    canvas.setStrokeColor(colors.black)
     canvas.line(43, 28, A4[0] - 43, 28)
-    canvas.setFillColor(colors.HexColor("#42576A"))
-    canvas.setFont("Helvetica", 8)
+    canvas.setFillColor(colors.black)
+    canvas.setFont("TimesNewRoman", 8)
     canvas.drawString(43, 16, "Programming for Business Analytics | Group 5")
     canvas.drawRightString(A4[0] - 43, 16, str(document.page))
     canvas.restoreState()

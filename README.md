@@ -16,6 +16,8 @@ The figures describe **546,364 completed, non-prebooked deliveries** in the Meit
 
 The data-preparation and plotting code uses R. Python is used only to typeset the PDF and editable narrative.
 
+All report and figure text uses black Times New Roman. Install Times New Roman for the R plots. The PDF builder embeds `times.ttf`, `timesbd.ttf`, `timesi.ttf`, and `timesbi.ttf` from `C:/Windows/Fonts`; on other systems set `PBA_FONT_DIR` to the directory containing your licensed copies of those files.
+
 ```r
 # Install once in R if needed:
 install.packages(c("data.table", "ggplot2", "scales"))

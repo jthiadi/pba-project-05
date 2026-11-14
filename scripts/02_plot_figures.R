@@ -3,12 +3,13 @@ suppressPackageStartupMessages({library(data.table); library(ggplot2)})
 dir.create("output/figures", recursive = TRUE, showWarnings = FALSE)
 teal <- "#167D8D"
 orange <- "#D17828"
-ink <- "#182F43"
-theme_set(theme_minimal(base_size = 12, base_family = "sans") + theme(
+ink <- "#000000"
+theme_set(theme_minimal(base_size = 12, base_family = "Times New Roman") + theme(
+  text = element_text(color = ink),
   plot.title = element_text(face = "bold", color = ink, size = 16),
-  plot.subtitle = element_text(color = "#42576A", size = 11, margin = margin(b = 14)),
+  plot.subtitle = element_text(color = ink, size = 11, margin = margin(b = 14)),
   plot.title.position = "plot", plot.caption.position = "plot",
-  plot.caption = element_text(hjust = 0, size = 9, color = "#42576A", margin = margin(t = 12)),
+  plot.caption = element_text(hjust = 0, size = 9, color = ink, margin = margin(t = 12)),
   panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(),
   axis.title = element_text(size = 11), axis.text = element_text(color = ink),
   plot.margin = margin(12, 18, 12, 12), legend.position = "top",
@@ -39,7 +40,8 @@ groups[, period := factor(period, levels = c("Off-peak", "Peak"))]
 groups[, label := sprintf("%.1f%%\nn = %s", 100*late_rate, format(n_orders, big.mark = ",", trim = TRUE))]
 p2 <- ggplot(groups, aes(workload_group, late_rate, color = period, shape = period)) +
   geom_point(size = 3.5) +
-  geom_text(aes(label = label), vjust = -.7, lineheight = 1.05, size = 3.6, show.legend = FALSE) +
+  geom_text(aes(label = label), color = ink, family = "Times New Roman",
+    vjust = -.7, lineheight = 1.05, size = 3.6, show.legend = FALSE) +
   facet_wrap(~period, nrow = 1) +
   scale_color_manual(values = c("Off-peak" = teal, "Peak" = orange)) +
   scale_shape_manual(values = c("Off-peak" = 16, "Peak" = 17)) +
@@ -54,13 +56,15 @@ p2 <- ggplot(groups, aes(workload_group, late_rate, color = period, shape = peri
     caption = paste("Peak: 11:00-14:00 and 17:00-20:00, classified by acceptance time in China (UTC+8).",
       "Workload includes valid prebooked deliveries; plotted outcomes exclude prebooked orders.",
       "Observed completed-order workload; these descriptive comparisons do not establish causality.", sep = "\n")) +
-  theme(legend.position = "none", strip.text = element_text(face = "bold", size = 12),
+  theme(legend.position = "none", strip.text = element_text(face = "bold", size = 12, color = ink),
     panel.spacing.x = grid::unit(18, "pt"))
 for (ext in c("png", "pdf")) {
+  # Cairo embeds Times New Roman in vector PDFs; PNG uses the system font.
+  figure_device <- if (ext == "pdf") grDevices::cairo_pdf else "png"
   ggsave(paste0("output/figures/figure1_delay_distribution.", ext), p1,
-    width = 9, height = 4.7, dpi = 320, bg = "white")
+    width = 9, height = 4.7, dpi = 320, bg = "white", device = figure_device)
   ggsave(paste0("output/figures/figure2_workload_lateness.", ext), p2,
-    width = 9, height = 5.1, dpi = 320, bg = "white")
+    width = 9, height = 5.1, dpi = 320, bg = "white", device = figure_device)
 }
 writeLines(trimws(capture.output(sessionInfo()), which = "right"), "output/sessionInfo.txt")
 cat("Saved both figures as PNG and vector PDF.\n")
