@@ -6,7 +6,7 @@
 
 - **Submission:** [two-page Milestone 3 PDF](output/pdf/PBA_Milestone3_Group5.pdf).
 - [Editable visualization write-up](Report.qmd).
-- [Milestone 2 proposal](../Milestone%202/Proposal.qmd).
+- [Milestone 2 proposal](../Milestone%202/PBA_Milestone2_Group5.qmd).
 - [Codebook, sample rules, source terms, and variable definitions](data/CODEBOOK.md).
 - [Small figure datasets](data/figure_data/) and [figures](output/figures/).
 
