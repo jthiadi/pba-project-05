@@ -2,7 +2,7 @@ project:
   type: default
   output-dir: output/pdf
   render:
-    - Report.qmd
+    - PBA_Milestone3_Group5.qmd
 format:
   pdf:
     output-file: PBA_Milestone3_Group5.pdf
