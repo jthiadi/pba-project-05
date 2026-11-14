@@ -1,3 +1,15 @@
+---
+format:
+  pdf:
+    pdf-engine: xelatex
+    mainfont: Times New Roman
+    sansfont: Times New Roman
+    CJKmainfont: Microsoft JhengHei
+    colorlinks: true
+    linkcolor: black
+    urlcolor: black
+---
+
   
  Programming for Business Analytics Final Project Proposal  
 **One More Order:** A Comparative Analysis of the Trade-Off Between   
