@@ -7,3 +7,16 @@ tmp/
 .RData
 __pycache__/
 .venv/
+
+.quarto/
+**/.quarto/
+**/*_files/
+
+**/*.tex
+**/*.log
+**/*.aux
+**/*.out
+**/*.toc
+**/*.knit.md
+
+Milestone 3/output/pdf/output/

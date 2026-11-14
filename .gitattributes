@@ -7,3 +7,5 @@
 *.png binary
 # Markdown source can use trailing spaces for deliberate hard line breaks.
 *.md whitespace=-blank-at-eol
+
+*.qmd text eol=lf whitespace=-blank-at-eol
